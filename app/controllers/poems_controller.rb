@@ -1,5 +1,5 @@
 class PoemsController < ApplicationController
-  before_action :set_poem, only: [:show, :edit, :destroy]
+  before_action :set_poem, only: [:show, :edit, :destroy, :update]
 
   # GET /poems
   # GET /poems.json
@@ -28,7 +28,7 @@ class PoemsController < ApplicationController
 
     respond_to do |format|
       if @poem.save
-        format.html { redirect_to @poem, notice: 'Poem was successfully created.' }
+        format.html { redirect_to poems_path, notice: 'Poem was successfully created.' }
         format.json { render :show, status: :created, location: @poem }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PoemsController < ApplicationController
   def update
     respond_to do |format|
       if @poem.update(poem_params)
-        format.html { redirect_to @poem, notice: 'Poem was successfully updated.' }
+        format.html { redirect_to poems_path, notice: 'Poem was successfully updated.' }
         format.json { render :show, status: :ok, location: @poem }
       else
         format.html { render :edit }
@@ -69,6 +69,6 @@ class PoemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poem_params
-      params.require(:poem).permit(:content, :auther)
+      params.require(:poem).permit(:title, :content, :auther)
     end
 end
